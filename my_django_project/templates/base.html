@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Project Informatica</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='icon'  type="image/png" href="/static/img/R.png" />
+
+{% load staticfiles %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}" />
+
+<link rel="stylesheet" href = "{% static 'css/bootstrap-datetimepicker.min.css' %}"  media="screen"/>
+<!--The below link is to support drag and drop of rows  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet">
+
+<!-- Excel feature -->
+<link rel="stylesheet" href="/static/Excel-like-Bootstrap-Table-Sorting-Filtering-Plugin/src/excel-bootstrap-table-filter-style.css">
+
+<!-- Bootstrap Dropdown Hover CSS -->
+<!--<link href="/static/css/animate.min.css" rel="stylesheet">-->
+<link href="/static/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+
+<!--<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">-->
+
+<!-- The below jquery will allow function sortable-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="{% static 'js/bootstrap-select.js' %}"></script>
+
+
+
+<script src = "{% static 'js/bootstrap-datetimepicker.js' %}" charset="UTF-8" ></script>
+<script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+
+
+</head>
+
+
+<style>
+
+    .catfirstToolbar {
+        clear: both;
+        /*background-color:#337ab7;*/
+        background:#10388c;
+        width: 100%;
+        height: 90px;
+        text-align: center;
+        color: #fff;
+        font-family: Cambria, Georgia, serif;
+        position: relative;
+
+        display: flex;
+        width: auto;
+    }
+
+
+</style>
+
+<body>
+    <div class="catfirstToolbar">
+
+    {% if request.resolver_match.view_name not in request.session.igonore_pages%}
+         <div class="col col-lg-1" style = "padding-right: 70px; padding-top:25px; font-size:1.9em">
+                <a href="/home" class ="headlink" style="cursor: pointer;">  <span class = "glyphicon glyphicon-home"></span> </a>
+          </div>
+      {% endif %}
+
+      {% if request.resolver_match.view_name not in request.session.igonore_pages%}
+          <div class="col col-lg-8" style = "top:10%;padding-left:25%;padding-right:8%">
+            <h3> WELCOME TO INFORMATICA </h3>
+           </div>
+
+      {% else %}
+          <div class="col col-lg-8" style = "top:10%;padding-left:25%;padding-right:8%">
+            <h3> WELCOME TO INFORMATICA </h3>
+          </div>
+      {% endif %}
+
+
+      {% if request.session.username %}
+          <div class="col col-lg-2" style = "padding-top:35px;margin-left: -15px;">
+                 <span>Logged in as: {{request.session.username}}</span>
+          </div>
+          <div class="col col-lg-1" style = "padding-top:20px; font-size: 18px !important;">
+                <a href="/logout" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-log-out"
+                                                      style="font-size:1.3em;"></span> Logout</a>
+          </div>
+      {%  endif %}
+
+      {%if request.session.menu_items == True %}
+          <div class="col col-lg-1 dropdown" style="padding-top:20px;" id = "main_menu_css">
+             <button class="btn btn-default dropdown-toggle default_btn" type="button" data-toggle="dropdown"
+                        data-hover="dropdown">
+                    <span style="font-size:25px;cursor:pointer;" align="rigth">&#9776;</span>
+             </button>
+             <ul class="dropdown-menu" >
+                {%if 'auto_cap_home' not in request.resolver_match.view_name %}
+                        <li><a href = '/home'>Home</a></li>
+                {% endif %}
+                        <li><a href = '/about'>About</a></li>
+                        <li><a href="/model_desc">Model Description</a><li>
+                        <!-- <li> <a href="/help" target="_blank">Online Guide</a></li> -->
+             </ul>
+
+          </div>
+      {% endif %}
+   </div>
+
+
+{% block content %} {% endblock %}
+
+
+
+
+
+</body>
+</html>

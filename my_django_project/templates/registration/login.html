@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+
+<style>
+
+.login_1 {
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+ }
+
+
+
+</style>
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+<div id = "background_img">
+  <div class="wrapper" id = "back_css" >
+    {% if logout_msg == True %}
+      <h3 style="color:white;font-size:20px!important;"> Logged out successfully</h3>
+    {% endif %}
+    <form method="post" class="form-signin">
+    {% csrf_token %}
+    <!--{{ form.as_p }} This is for default login from django-->
+      <center><h3 class="form-signin-heading" style="color: black;"><b>Please login</b></h3></center>
+      <input type="text" class="form-control" name="username" placeholder="User Name" required="" autofocus="" />
+      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+            <h4 style="color:red;">{{login_message}}</h4>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+  </div>
+</div>
+<!--    <button type="submit">Login</button>-->
+
+
+{% endblock %}
+
+
+
