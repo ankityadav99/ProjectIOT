@@ -38,7 +38,8 @@ urlpatterns = [
     path('productfeedback/', include(router3.urls)),
     url(r'^register/$', views.UserRegistrationView.as_view(), name='register'),
     url(r'^login/$', views.UserLoginForm.as_view(), name='login'),
-    url(r'^logout/$', views.logout),
     url(r'^$', views.UserLoginForm.as_view(), name='login'),
+    #url(r'^logout/$', views.UserLoginForm.as_view(), name='logout'),
+    url(r'^logout/$', views.logout),
     url(r'^home/', views.home),
 ]

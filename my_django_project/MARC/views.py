@@ -112,11 +112,16 @@ class UserLoginForm(View):
 @csrf_exempt
 def logout(request):
     request.session.flush()
-    return render_to_response('registration/login.html', locals())
+    return render_to_response('registration/logout.html', locals())
 
 
 # Create your views here.
+@csrf_exempt
 def home(request):
-    print (request.session['username'])
-    data = []
-    return render_to_response('index.html', locals())
+    if 'username' in request.session:
+        data = []
+        return render_to_response('index.html', locals())
+    else:
+        return redirect('/login', locals())
+
+
