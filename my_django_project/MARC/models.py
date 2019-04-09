@@ -93,3 +93,9 @@ class ProductFeedback(models.Model):
                                           self.product_quality,
                                           self.suggestions,
                                           self.future_scope)
+
+class ProductTypes(models.Model):
+    product_type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return  " %s " % (self.product_type)

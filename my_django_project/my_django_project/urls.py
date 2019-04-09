@@ -39,7 +39,10 @@ urlpatterns = [
     url(r'^register/$', views.UserRegistrationView.as_view(), name='register'),
     url(r'^login/$', views.UserLoginForm.as_view(), name='login'),
     url(r'^$', views.UserLoginForm.as_view(), name='login'),
+
     #url(r'^logout/$', views.UserLoginForm.as_view(), name='logout'),
+    url(r'^$', views.base),
     url(r'^logout/$', views.logout),
     url(r'^home/', views.home),
+    url(r'^products/', views.productinfo),
 ]

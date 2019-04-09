@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProductInfo, ProductionProductInfo, ProductFeedback
+from .models import ProductInfo, ProductionProductInfo, ProductFeedback, ProductTypes
 
 
 class AdminProductInfo(admin.ModelAdmin):
@@ -34,3 +34,4 @@ class AdminProductFeedback(admin.ModelAdmin):
 admin.site.register(ProductInfo, AdminProductInfo)
 admin.site.register(ProductionProductInfo, AdminProductionProductInfo)
 admin.site.register(ProductFeedback, AdminProductFeedback)
+admin.site.register(ProductTypes)

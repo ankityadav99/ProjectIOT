@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response, redirect
 from rest_framework import viewsets
-from .models import ProductInfo, ProductionProductInfo, ProductFeedback
+from .models import ProductInfo, ProductionProductInfo, ProductFeedback, ProductTypes
 from .serializer import ProductInfoSerializer, \
     ProductionProductInfoSerializer, \
     ProductFeedbackSerializer
@@ -125,3 +125,18 @@ def home(request):
         return redirect('/login', locals())
 
 
+# Create a index page
+def productinfo(request):
+    return render_to_response('product.html', locals())
+
+
+# Create a base html loader
+def base(request):
+    if 'username' in request.session:
+        data = []
+        for product in ProductTypes.objects.all():
+            data.append(product.product_type)
+
+        return render_to_response('base.html', locals())
+    else:
+        return redirect('/login', locals())
