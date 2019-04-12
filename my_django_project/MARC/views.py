@@ -74,18 +74,22 @@ class UserLoginForm(View):
 
     #to diaply the blank form
     def get(self,request):
-        #print ('Action',request.path)
-        if request.path == '/logout/':
-            print ("logging out")
-            logout_msg = True
-            print (logout_msg)
-        else:
-            logout_msg = False
+        #print("------>>>>>", request.session.items())
+        if bool(request.session.items()) == False:
 
-        request.session.flush()
-        form = self.form_class(None)
-        request.session['igonore_pages'] = ['login', 'logout', 'auto_cap.views.home']
-        return render(request, self.template_name, {'form':form, 'logout_msg':logout_msg})
+            if request.path == '/logout/':
+                print ("logging out")
+                logout_msg = True
+                print (logout_msg)
+            else:
+                logout_msg = False
+            request.session.flush()
+            form = self.form_class(None)
+            return render(request, self.template_name, {'form':form, 'logout_msg':logout_msg})
+        else:
+            print(" -->> Redirecting to home as already we have logged in")
+            return redirect('/home')
+
 
     #process form data
     def post(self, request):
@@ -118,6 +122,7 @@ def logout(request):
 # Create your views here.
 @csrf_exempt
 def home(request):
+    print("------>>>>>",request.session.items())
     if 'username' in request.session:
         data = []
         return render_to_response('index.html', locals())
@@ -126,9 +131,19 @@ def home(request):
 
 
 # Create a index page
-def productinfo(request):
+def product_info(request):
+    product_col = [product.name.title() for product in ProductInfo._meta.get_fields()]
+    product_data = ProductInfo.objects.values()
+
     return render_to_response('product.html', locals())
 
+
+def production_product_info(request):
+    return render_to_response('production_products.html', locals())
+
+
+
+'''
 
 # Create a base html loader
 def base(request):
@@ -140,3 +155,5 @@ def base(request):
         return render_to_response('base.html', locals())
     else:
         return redirect('/login', locals())
+
+'''

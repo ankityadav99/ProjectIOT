@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>Project Informatica</title>
+  <title>IOT Informatica</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel='icon'  type="image/png" href="/static/img/R.png" />
@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}" />
+
 
 <link rel="stylesheet" href = "{% static 'css/bootstrap-datetimepicker.min.css' %}"  media="screen"/>
 <!--The below link is to support drag and drop of rows  -->
@@ -28,6 +29,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
 <link rel="stylesheet" href="{% static 'css/cs-skin-elastic.css' %}">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -44,6 +46,20 @@
 <script src="{% static 'js/bootstrap-select.js' %}"></script>
 <script src = "{% static 'js/bootstrap-datetimepicker.js' %}" charset="UTF-8" ></script>
 <script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script src="{% static 'js/lib/data-table/datatables.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/buttons.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/jszip.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/vfs_fonts.js' %}"></script>
+<script src="{% static 'js/lib/data-table/buttons.html5.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/buttons.print.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'js/init/datatables-init.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/lib/data-table/jquery-1.12.4.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/lib/data-table/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+
 
 
 </head>
@@ -91,56 +107,7 @@
 </style>
 
 <body>
-   <!-- <div class="catfirstToolbar">
-
-    {% if request.resolver_match.view_name not in request.session.igonore_pages%}
-         <div class="col col-lg-1" style = "padding-right: 70px; padding-top:25px; font-size:1.9em">
-                <a href="/home" class ="headlink" style="cursor: pointer;">  <span class = "glyphicon glyphicon-home"></span> </a>
-          </div>
-      {% endif %}
-
-      {% if request.resolver_match.view_name not in request.session.igonore_pages%}
-          <div class="col col-lg-8" style = "top:10%;padding-left:25%;padding-right:8%">
-            <h3> WELCOME TO INFORMATICA </h3>
-           </div>
-
-      {% else %}
-          <div class="col col-lg-8" style = "top:10%;padding-left:25%;padding-right:8%">
-            <h3> WELCOME TO INFORMATICA </h3>
-          </div>
-      {% endif %}
-
-
-      {% if request.session.username %}
-          <div class="col col-lg-2" style = "padding-top:35px;margin-left: -15px;">
-                 <span>Logged in as: {{request.session.username}}</span>
-          </div>
-          <div class="col col-lg-1" style = "padding-top:20px; font-size: 18px !important;">
-                <a href="/logout" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-log-out"
-                                                      style="font-size:1.3em;"></span> Logout</a>
-          </div>
-      {%  endif %}
-
-      {%if request.session.menu_items == True %}
-          <div class="col col-lg-1 dropdown" style="padding-top:20px;" id = "main_menu_css">
-             <button class="btn btn-default dropdown-toggle default_btn" type="button" data-toggle="dropdown"
-                        data-hover="dropdown">
-                    <span style="font-size:25px;cursor:pointer;" align="rigth">&#9776;</span>
-             </button>
-             <ul class="dropdown-menu" >
-                {%if 'auto_cap_home' not in request.resolver_match.view_name %}
-                        <li><a href = '/home'>Home</a></li>
-                {% endif %}
-                        <li><a href = '/about'>About</a></li>
-                        <li><a href="/model_desc">Model Description</a><li>
-
-             </ul>
-
-          </div>
-      {% endif %}
-   </div>-->
-
-       <!-- Left Panel -->
+  <!-- Left Panel -->
    {% if request.session.username %}
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -153,43 +120,16 @@
                         <li class="menu-item">
                         <a href="/products/" class="dropdown-toggle">
                             <!-- HEADERS -->
-                            <i class="menu-icon fa fa-microchip"></i>Home Automation</a>
+                            <i class="menu-icon fa fa-microchip"></i>Products</a>
                     </li>
                     <li class="menu-item">
-                        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                        <a href="/production/" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
                             <!-- HEADERS -->
-                            <i class="menu-icon fa fa-h-square"></i>Medical Monitoring</a>
-                        <ul class="sub-menu children dropdown-menu">
+                            <i class="menu-icon fa fa-h-square"></i>Production Products</a>
+                        <!-- <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
                             <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- HEADERS -->
-                            <i class="menu-icon fa fa-th"></i>Security devices</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                            <!-- HEADERS -->
-                            <i class="menu-icon fa fa-th"></i>Basic Monitoring system</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                            <!-- HEADERS -->
-                            <i class="menu-icon fa fa-th"></i>Farm Monitoring</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                        </ul>
+                        </ul>-->
                     </li>
 
 
@@ -237,8 +177,7 @@
    {% endif %}
     <!-- /#left-panel -->
 
-
-
+  <!-- Right Panel -->
    <div id="right-panel" class="right-panel">
                <!-- Header-->
         <header id="header" class="header">
@@ -264,80 +203,10 @@
                                 </form>
                             </div>
 
-                            <div class="dropdown for-notification">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bell"></i>
-                                    <span class="count bg-danger">3</span>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="notification">
-                                    <p class="red">You have 3 Notification</p>
-                                    <a class="dropdown-item media" href="#">
-                                        <i class="fa fa-check"></i>
-                                        <p>Server #1 overloaded.</p>
-                                    </a>
-                                    <a class="dropdown-item media" href="#">
-                                        <i class="fa fa-info"></i>
-                                        <p>Server #2 overloaded.</p>
-                                    </a>
-                                    <a class="dropdown-item media" href="#">
-                                        <i class="fa fa-warning"></i>
-                                        <p>Server #3 overloaded.</p>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="dropdown for-message">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-envelope"></i>
-                                    <span class="count bg-primary">4</span>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="message">
-                                    <p class="red">You have 4 Mails</p>
-                                    <a class="dropdown-item media" href="#">
-                                        <span class="photo media-left"><img alt="avatar"
-                                                                            src="{% static 'images/avatar/1.jpg' %}"></span>
-                                        <div class="message media-body">
-                                            <span class="name float-left">Jonathan Smith</span>
-                                            <span class="time float-right">Just now</span>
-                                            <p>Hello, this is an example msg</p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item media" href="#">
-                                        <span class="photo media-left"><img alt="avatar"
-                                                                            src="{% static 'images/avatar/2.jpg' %}"></span>
-                                        <div class="message media-body">
-                                            <span class="name float-left">Jack Sanders</span>
-                                            <span class="time float-right">5 minutes ago</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item media" href="#">
-                                        <span class="photo media-left"><img alt="avatar"
-                                                                            src="{% static 'images/avatar/3.jpg' %}"></span>
-                                        <div class="message media-body">
-                                            <span class="name float-left">Cheryl Wheeler</span>
-                                            <span class="time float-right">10 minutes ago</span>
-                                            <p>Hello, this is an example msg</p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item media" href="#">
-                                        <span class="photo media-left"><img alt="avatar"
-                                                                            src="{% static 'images/avatar/4.jpg' %}"></span>
-                                        <div class="message media-body">
-                                            <span class="name float-left">Rachel Santos</span>
-                                            <span class="time float-right">15 minutes ago</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="user-area dropdown float-right">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false"><i class="far fa-male"></i>
                             </a>
-
                             <div class="user-menu dropdown-menu">
                                 <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
 
@@ -384,11 +253,22 @@
     <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="assets/js/init/weather-init.js"></script>
+    <script src="{% static 'js/init/weather-init.js' %}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="assets/js/init/fullcalendar-init.js"></script>
+    <script src="{% static  'js/init/fullcalendar-init.js' %}"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+
+
+
+
+
     {% endif %}
 
 

@@ -2,9 +2,63 @@
 
 {% block content %}
 
-<h3> Hello world how are uuuu</h3>
+<h3>Products supported</h3>
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">IOT Products </strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    {% for product in product_col %}
+                                        <th>{{product}}</th>
+                                    {% endfor %}
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for product_info in product_data %}
+                                        <tr>
+                                            <td>{{product_info.sl_no}} </td>
+                                            <td>{{product_info.id}} </td>
+                                            <td>{{product_info.name_of_product}} </td>
+                                            <td>{{product_info.type_of_product}} </td>
+                                            <td>{{product_info.firmware_version}} </td>
+                                            <td>{{product_info.os_supported}} </td>
+                                            <td>{{product_info.supported_protocols}} </td>
+                                            <td>{{product_info.max_firmware_support}} </td>
+                                            <td>{{product_info.env_support}} </td>
+                                            <td>{{product_info.power_capability}} </td>
+                                            <td>{{product_info.pricing}} </td>
+                                            <td>{{product_info.configurable}} </td>
+                                            <td>{{product_info.desc}} </td>
+                                        </tr>
+                                    {% endfor %}
 
 
-<h2> I am happy here </h2>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('#bootstrap-data-table-export').DataTable();
+      } );
+  </script>
+
 
 {% endblock %}
