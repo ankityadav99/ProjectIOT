@@ -4,5 +4,64 @@
 
 <h3> Production Product details</h3>
 
+<div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Production Product info</strong>
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        {% for product in production_product_col %}
+                                            <th>{{product}}</th>
+                                                {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product_info in prod_product_data %}
+                                    <tr>
+                                        <td>{{product_info.sl_no}} </td>
+                                        <td>{{product_info.id}} </td>
+                                        <td>{{product_info.name_of_product}} </td>
+                                        <td>{{product_info.type_of_product}} </td>
+                                        <td>{{product_info.firmware_version}} </td>
+                                        <td>{{product_info.username}} </td>
+                                        <td>{{product_info.customer_id}} </td>
+                                        <td>{{product_info.last_Upgraded}} </td>
+                                        <td>{{product_info.validity}} </td>
+                                        <td>{{product_info.alarms}} </td>
+                                        <td>{{product_info.health}} </td>
+                                        <td>{{product_info.auto_recovery}} </td>
+                                        <td>{{product_info.last_rebooted}} </td>
+                                        <td>{{product_info.system_crash_report}} </td>
+                                        <td>{{product_info.security}} </td>
+                                        <td>{{product_info.authority}} </td>
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('table#bootstrap-data-table').DataTable();
+      } );
+  </script>
+
+
+
+
 
 {% endblock %}

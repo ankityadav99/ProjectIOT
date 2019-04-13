@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response, redirect
 from rest_framework import viewsets
-from .models import ProductInfo, ProductionProductInfo, ProductFeedback, ProductTypes
+from .models import ProductInfo, ProductionProductInfo, ProductFeedback, ProductType
 from .serializer import ProductInfoSerializer, \
     ProductionProductInfoSerializer, \
     ProductFeedbackSerializer
@@ -122,9 +122,13 @@ def logout(request):
 # Create your views here.
 @csrf_exempt
 def home(request):
-    print("------>>>>>",request.session.items())
     if 'username' in request.session:
-        data = []
+        # This is capture product categories
+        type_col = [prod_type.name.title() for prod_type in
+                    ProductType._meta.get_fields() if prod_type.name != 'id']
+
+        prod_catogeries = ProductType.objects.values()
+
         return render_to_response('index.html', locals())
     else:
         return redirect('/login', locals())
@@ -135,25 +139,24 @@ def product_info(request):
     product_col = [product.name.title() for product in ProductInfo._meta.get_fields()]
     product_data = ProductInfo.objects.values()
 
+    # This is capture product categories
+    type_col = [prod_type.name.title() for prod_type in
+                ProductType._meta.get_fields() if prod_type.name != 'id']
+
+    prod_catogeries = ProductType.objects.values()
+
+
+
     return render_to_response('product.html', locals())
 
 
 def production_product_info(request):
+    production_product_col = \
+        [prod_product.name.title() for prod_product in
+         ProductionProductInfo._meta.get_fields()]
+
+
+    prod_product_data = ProductionProductInfo.objects.values()
+
     return render_to_response('production_products.html', locals())
 
-
-
-'''
-
-# Create a base html loader
-def base(request):
-    if 'username' in request.session:
-        data = []
-        for product in ProductTypes.objects.all():
-            data.append(product.product_type)
-
-        return render_to_response('base.html', locals())
-    else:
-        return redirect('/login', locals())
-
-'''

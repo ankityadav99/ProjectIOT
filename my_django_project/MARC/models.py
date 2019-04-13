@@ -94,8 +94,15 @@ class ProductFeedback(models.Model):
                                           self.suggestions,
                                           self.future_scope)
 
-class ProductTypes(models.Model):
-    product_type = models.CharField(max_length=255)
+class ProductType(models.Model):
+    sl_no = models.IntegerField(default=0)
+    prod_id = models.CharField(default='HA123', max_length=20)
+    product_type = models.CharField(default='Home Automation', max_length=255)
+    category = models.IntegerField(default=0)
+    status = models.CharField(default='complete', max_length=20)
 
     def __str__(self):
-        return  " %s " % (self.product_type)
+        return  " %s %s %s %s %s " % (self.sl_no, self.prod_id,
+                                      self.product_type,
+                                      self.category,
+                                      self.status)

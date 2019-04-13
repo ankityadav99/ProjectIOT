@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProductInfo, ProductionProductInfo, ProductFeedback, ProductTypes
+from .models import ProductInfo, ProductionProductInfo, ProductFeedback, ProductType
 
 
 class AdminProductInfo(admin.ModelAdmin):
@@ -30,8 +30,11 @@ class AdminProductFeedback(admin.ModelAdmin):
                     'future_scope')
 
 
+class AdminProductType(admin.ModelAdmin):
+    list_display = ('sl_no', 'prod_id', 'product_type', 'category', 'status')
+
 # Register your models here.
 admin.site.register(ProductInfo, AdminProductInfo)
 admin.site.register(ProductionProductInfo, AdminProductionProductInfo)
 admin.site.register(ProductFeedback, AdminProductFeedback)
-admin.site.register(ProductTypes)
+admin.site.register(ProductType, AdminProductType)

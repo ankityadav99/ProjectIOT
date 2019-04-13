@@ -2,7 +2,230 @@
 
 {% block content %}
 
-<h3> Hello world </h3>
-{{data }}
+<style>
+    .chart-container{
+        min-width: 370px!important;
+
+    }
+
+    #flotPie1 table {
+        top: 20px!important;
+        right: 35px!important;
+    }
+
+</style>
+
+
+<div class="content">
+    <div class="animated fadeIn">
+        <!-- Widgets  -->
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-five">
+                            <div class="stat-icon dib flat-color-1">
+                                <i class="pe-7s-cash"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="text-left dib">
+                                    <div class="stat-text">$<span class="count">23569</span></div>
+                                    <div class="stat-heading">Revenue</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-2">
+                            <i class="pe-7s-cart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">1500</span></div>
+                                <div class="stat-heading">Production Sales</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-3">
+                            <i class="pe-7s-browser"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">50</span></div>
+                                <div class="stat-heading">Products </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="pe-7s-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">100</span></div>
+                                <div class="stat-heading">Clients</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Widgets -->
+    <!-- Orders -->
+<div class="orders">
+    <div class="row">
+        <div class="col-xl-7">
+            <div class="card">
+                <div class="card-body">
+                    <a href="/products/">
+                    <h4 class="box-title">Products Categories Manufactured </h4></a>
+                </div>
+                <div class="card-body--">
+                    <div class="table-stats order-table ov-h">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    {% for type in type_col %}
+                                        {% if type != 'id'%}
+                                            <th> {{type}}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for prod_cat in prod_catogeries%}
+                                    <tr>
+                                        <td class="serial">{{prod_cat.sl_no}}</td>
+                                        <td><span>{{prod_cat.prod_id}}</span></td>
+                                        <td> <span class="product">{{prod_cat.product_type}}</span> </td>
+                                        <td><span> {{prod_cat.category}} </span></td>
+                                        <td>
+                                            <span class="badge badge-{{prod_cat.status}}">
+                                                {% if prod_cat.status == 'pending' %}
+                                                    In Progress
+                                                {% else %}
+                                                    {{prod_cat.status}}
+                                                {% endif %}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div> <!-- /.table-stats -->
+                </div>
+            </div> <!-- /.card -->
+        </div>  <!-- /.col-lg-8 -->
+
+        <div class="col-xl-5">
+            <div class="row">
+                <div class="col-lg-12 col-xl-10">
+                    <div class="card br-0">
+                        <div class="card-body">
+                            <div class="chart-container ov-h">
+                                <div id="flotPie1" class="float-chart"></div>
+                            </div>
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+
+            </div>
+            </div> <!-- /.col-md-4 -->
+
+    </div>
+
+    </div>
+
+
+</div>
+
+
+        <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+    <script src="assets/js/init/weather-init.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    <script src="assets/js/init/fullcalendar-init.js"></script>
+
+    <!--Local Stuff-->
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+          $('table#bootstrap-data-table').DataTable();
+      } );
+
+
+      // Pie chart flotPie1
+        var piedata = [
+            { label: "Home Automation", data: [[1,50]], color: '#5c6bc0'},
+            { label: "Medical Devices", data: [[1,25]], color: '#ef5350'},
+            { label: "Farmimg montoring", data: [[1,10]], color: '#66bb6a'},
+            { label: "Military montoring", data: [[1,20]], color: '#17D4DB'},
+            { label: "Food Industry", data: [[1,15]], color: '#C96A33'}
+        ];
+
+
+        $.plot('#flotPie1', piedata, {
+                series: {
+                    pie: {
+                        show: true,
+                        radius: 1,
+                        innerRadius: 0.65,
+                        label: {
+                            show: true,
+                            radius: 2/3,
+                            threshold: 1
+                        },
+                        stroke: {
+                            width: 0
+                        }
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true
+                }
+            });
+            // Pie chart flotPie1  End
+
+  </script>
+
+
+
+
 
 {% endblock %}
