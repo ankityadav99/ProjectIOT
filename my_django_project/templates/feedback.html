@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .form-control{
+        width: 30%;
+    }
+
+    .input-group{
+        width: 30%;
+    }
+
+
+
+</style>
+
+
+
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to submit?')) {
+           document.getElementById('submit_feedback').submit();
+       } else {
+           return false;
+       }
+    }
+
+</script>
+
+
+
+<h3 class="header_font"> Customer Feedback </h3>
+<hr>
+<br>
+
+<form action="#" method="post">
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Product type</label>
+    <select name="product_type" class="form-control" id="exampleFormControlSelect1">
+        {% for product in product_type%}
+          <option>{{product}}</option>
+        {% endfor %}
+    </select>
+  </div>
+    <br>
+  <div class="form-group">
+    <label >How do you rate the product</label>
+      <select name="product_rating" class="form-control" id="exampleFormControlSelect2">
+          <option>-- None -- </option>
+          <option>Excellent</option>
+          <option>Very Good</option>
+          <option>Good</option>
+          <option>Fair</option>
+          <option>Poor</option>
+        </select>
+  </div>
+    <br>
+  <div class="form-group">
+    <label>Value for money (%)?</label>
+      <select name="money_value" class="form-control" id="exampleFormControlSelect2">
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </select>
+  </div>
+    <br>
+ <div class="form-group">
+    <label>Would you recommend this product to your friend/family? </label>
+      <select name="recommend" class="form-control" id="exampleFormControlSelect2">
+          <option>-- None -- </option>
+          <option>Yes, definitely</option>
+          <option>Maybe, if it was cheaper</option>
+          <option>No, never</option>
+          <option>Dont no, can't say</option>
+        </select>
+  </div>
+    <br>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">What would you think product needs improvment</label>
+    <textarea name="improvement" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+  </div>
+    <br>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Comments</label>
+    <textarea name="comments" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+
+  <input id="submit_feedback" name="view" onclick="clicked()"
+         type="submit" class="btn btn-info btn-lg" value="Submit">
+
+
+</form>
+
+
+
+
+{% endblock %}

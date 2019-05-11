@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="header_font"> Product Reporting </h3>
+<hr>
+
+<style>
+
+	#table_body{
+		bgcolor="#00FF00";
+
+	}
+
+	.container-table100{
+		background: #FFF !important;
+
+	}
+
+	#header{
+		font-family: 'Playfair Display', serif;
+		align: left;
+		font-size: 30px;
+
+	}
+
+</style>
+
+<div class="row">
+	<div class="col-lg-3 col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<div class="led-box">
+						<div class="led-red"></div>
+					</div>
+				<div class="stat-content">
+					<div class="text-left dib">
+						<div class="stat-text"><span class="count">{{product_alarms| length}}</span></div>
+						<div class="stat-heading"><a href="#"> Product Alarms </a></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-lg-5 col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<div class="led-box">
+						<div class="led-green"></div>
+					</div>
+				<div class="stat-content">
+					<div class="text-left dib">
+						<div class="stat-text"><span class="count">{{product_recovered| length}}</span></div>
+						<div class="stat-heading"><a href="#">Products recovered successfully</a></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<div class="led-box">
+						<div class="led-yellow"></div>
+					</div>
+				<div class="stat-content">
+					<div class="text-left dib">
+						<div class="stat-text"><span class="count">{{product_warnings| length}}</span></div>
+						<div class="stat-heading"><a href="#"> Need Attention </a></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!---  Table reporting Alarms  -->
+
+<h2 id="header">Product Alarms </h2>
+<br>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+		{% for a_col in alarm_col%}
+      		<th scope="col">{{a_col}}</th>
+	{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  	{% for a_data in product_alarms %}
+    	<tr>
+      		<th scope="row">{{a_data.sl_no}}</th>
+      		<td>{{a_data.product}}</td>
+      		<td>{{a_data.reported_time}}</td>
+			<td>{{a_data.location}}</td>
+			<td>{{a_data.alarms}}</td>
+
+    	</tr>
+  	{% endfor %}
+  </tbody>
+</table>
+
+<br>
+<br>
+<!--  End of table1 -->
+
+<!---  Table reporting Warning  -->
+<h2 id="header">Product Warnings </h2>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+	  {% for w_col in warn_col%}
+      		<th scope="col">{{w_col}}</th>
+	  {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  	{% for a_data in product_warnings %}
+    	<tr>
+      		<th scope="row">{{a_data.sl_no}}</th>
+      		<td>{{a_data.product}}</td>
+      		<td>{{a_data.reported_time}}</td>
+			<td>{{a_data.location}}</td>
+			<td>{{a_data.warnings}}</td>
+
+    	</tr>
+  	{% endfor %}
+  </tbody>
+</table>
+<br>
+<br>
+<!-- End of table2 --->
+
+<!---  Table reporting Health  -->
+<h2 id="header">Product Recovered </h2>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+	  {% for r_col in recovered_col%}
+      		<th scope="col">{{r_col}}</th>
+	  {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  	{% for a_data in product_recovered %}
+    	<tr>
+      		<th scope="row">{{a_data.sl_no}}</th>
+      		<td>{{a_data.product}}</td>
+      		<td>{{a_data.reported_time}}</td>
+			<td>{{a_data.location}}</td>
+			<td>{{a_data.recovery_info}}</td>
+
+    	</tr>
+  	{% endfor %}
+  </tbody>
+</table>
+
+<!-- End of table3 -->
+
+{% endblock %}

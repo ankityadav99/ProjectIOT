@@ -41,8 +41,9 @@ urlpatterns = [
     url(r'^$', views.UserLoginForm.as_view(), name='login'),
 
     #url(r'^logout/$', views.UserLoginForm.as_view(), name='logout'),
-    url(r'^$', views.base),
+    #url(r'^$', views.base),
     url(r'^logout/$', views.logout),
     url(r'^home/', views.home),
-    url(r'^products/', views.productinfo),
+    url(r'^products/', views.product_info),
+    url(r'^production', views.production_product_info),
 ]

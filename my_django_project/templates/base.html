@@ -13,11 +13,22 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}" />
-
+<link href="https://fonts.googleapis.com/css?family=Artifika|Zilla+Slab|Playfair+Display" rel="stylesheet">
 
 <link rel="stylesheet" href = "{% static 'css/bootstrap-datetimepicker.min.css' %}"  media="screen"/>
 <!--The below link is to support drag and drop of rows  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet">
+
+<!-- This is for table reporting -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/vendor/animate/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/vendor/select2/select2.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/table_main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/button_flash.css' %}">
+
+
 
 <!-- This is used for dashboard -->
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
@@ -45,7 +56,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="{% static 'js/moments.js' %}"></script>
 <script src="{% static 'js/bootstrap-select.js' %}"></script>
 <script src = "{% static 'js/bootstrap-datetimepicker.js' %}" charset="UTF-8" ></script>
 <script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
@@ -60,9 +71,10 @@
 <script type="text/javascript" src="{% static 'js/lib/data-table/buttons.colVis.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/init/datatables-init.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
 <script src="{% static 'js/lib/data-table/jquery-1.12.4.js' %}" type="text/javascript"></script>
 <script src="{% static 'js/lib/data-table/jquery.dataTables.min.js' %}" type="text/javascript"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 </head>
@@ -72,39 +84,53 @@
     #weatherWidget .currentDesc {
         color: #ffffff!important;
     }
-        .traffic-chart {
-            min-height: 335px;
-        }
-        #flotPie1  {
-            height: 150px;
-        }
-        #flotPie1 td {
-            padding:3px;
-        }
-        #flotPie1 table {
-            top: 20px!important;
-            right: -10px!important;
-        }
-        .chart-container {
-            display: table;
-            min-width: 270px ;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        #flotLine5  {
-             height: 105px;
-        }
+    .traffic-chart {
+        min-height: 335px;
+    }
+    #flotPie1  {
+        height: 150px;
+    }
+    #flotPie1 td {
+        padding:3px;
+    }
+    #flotPie1 table {
+        top: 20px!important;
+        right: -10px!important;
+    }
+    .chart-container {
+        display: table;
+        min-width: 270px ;
+        text-align: left;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    #flotLine5  {
+         height: 105px;
+    }
 
-        #flotBarChart {
-            height: 150px;
-        }
-        #cellPaiChart{
-            height: 160px;
-        }
+    #flotBarChart {
+        height: 150px;
+    }
+    #cellPaiChart{
+        height: 160px;
+    }
 
+    .header_font {
+        font-family: 'Zilla Slab', serif;
+        font-size: 40px;
+    }
 
-
+    hr {
+  -moz-border-bottom-colors: none;
+  -moz-border-image: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+  border-style: solid none;
+  border-width: 1px 0;
+  margin: 15px 0;
+}
 
 
 </style>
@@ -138,22 +164,22 @@
 
                     <li class="menu-title"> Services</li><!-- /.menu-title -->
                         <li class="menu-item">
-                            <a href="#" class="dropdown-toggle">
+                            <a href="/manage/" class="dropdown-toggle">
                                 <!-- HEADERS -->
                                 <i class="menu-icon fa fa-mobile"></i>Manage devices</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="dropdown-toggle">
+                            <a href="/reporting/" class="dropdown-toggle">
                                 <!-- HEADERS -->
                                 <i class="menu-icon fa fa-file"></i>Reporting</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="dropdown-toggle">
+                            <a href="/analytics/" class="dropdown-toggle">
                                 <!-- HEADERS -->
                                 <i class="menu-icon fa fa-pie-chart"></i>Analytics</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="dropdown-toggle">
+                            <a href="/feedback/" class="dropdown-toggle">
                                 <!-- HEADERS -->
                                 <i class="menu-icon fa fa-comments-o"></i>Customer Feedback</a>
                         </li>
@@ -195,19 +221,15 @@
                             </div>
 
                         <div class="user-area dropdown float-right">
-                            <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
-                            <!--<a href="#" class="dropdown-toggle active" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false"><i class="far fa-male"></i>
+                            <!--<a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a> -->
+                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-3x"></i>
                             </a>
                             <div class="user-menu dropdown-menu">
                                 <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
+                                <!--<a class="nav-link" href="/register"><i class="fa fa -cog"></i>Registration</a> -->
                                 <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
-                            </div> -->
+                            </div>
 
 
                         </div>
@@ -240,10 +262,7 @@
 
 
 
-
-
-
-
-
 </body>
 </html>
+
+

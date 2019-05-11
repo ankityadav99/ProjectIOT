@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="header_font"> Product Analysis </h3>
+<hr>
+
+<style>
+    #chart_font{
+        color:#757575;
+        font-family: Roboto;
+        font-size: 16px;
+    }
+
+
+</style>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawChart_product);
+      google.charts.setOnLoadCallback(drawChart_prod_product);
+      google.charts.setOnLoadCallback(drawChart_sales);
+      google.charts.setOnLoadCallback(drawChart_feedback);
+
+
+
+      function drawChart_product() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Home Automation', 10],
+          ['Medical Devices', 5],
+          ['Farming',  5],
+          ['Military', 3],
+          ['Food',    3],
+          ['Security', 2]
+        ]);
+
+        var options = {
+         chart: {
+            title: 'Products In-house',
+            subtitle: 'Production product usage',
+          },
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+
+
+      }
+
+      function drawChart_prod_product() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Home Automation', 50],
+          ['Medical Devices', 20],
+          ['Farming',  15],
+          ['Military', 25],
+          ['Food',    30],
+          ['Secuirty', 10]
+        ]);
+
+        var options = {
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+
+        chart.draw(data, options);
+
+
+      }
+
+      function drawChart_sales() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses', 'Profit'],
+          ['2016', 1000, 400, 200],
+          ['2017', 1170, 460, 250],
+          ['2018', 660, 1120, 300],
+          ['2019', 1030, 540, 350]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Product Sales',
+            subtitle: 'Sales, Expenses, and Profit: 2016-2019',
+          },
+          bars: 'vertical' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+
+      function drawChart_feedback() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Quality', 'letdown', 'Satisfaction', 'Performance'],
+          ['2016', 600, 800, 200, 400 ],
+          ['2017', 1000, 500, 500, 700],
+          ['2018', 1200, 300, 800, 800],
+          ['2019', 1200, 400, 750, 800]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Product Sales',
+            subtitle: 'Sales, Expenses, and Profit: 2016-2019',
+          },
+          bars: 'vertical' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material1'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+    </script>
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title" id="chart_font">Product Categoeries</h5>
+       <div id="piechart"  style="width: 700px; height: 300px;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title" id="chart_font">Production Product usage</h5>
+        <div id="piechart1" style="width: 580px; height: 300px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <!--<h5 class="card-title">Product Sales 2019 </h5> -->
+            <div id="barchart_material" style="width: 580px; height: 400px;"></div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <!--<h5 class="card-title">Product Sales 2019 </h5> -->
+            <div id="barchart_material1" style="width: 580px; height: 400px;"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}

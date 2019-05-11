@@ -62,12 +62,11 @@
 
         <div class="col-xl-3">
             <div class="row">
-                <div class="col-lg-12 col-xl-10">
+                <div class="col-lg-14 col-xl-14">
                     <div class="card br-0">
                         <div class="card-body">
-                            <div class="chart-container ov-h">
-                                <div id="flotPie1" class="float-chart"></div>
-                            </div>
+                            <div id="piechart" style="width: 700px; height: 350px;"></div>
+
                         </div>
                     </div><!-- /.card -->
                 </div>
@@ -145,44 +144,37 @@
     <!--Local Stuff-->
 
     <script type="text/javascript">
-
-        $(document).ready(function() {
-          $('table#bootstrap-data-table').DataTable();
-      } );
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart_product);
 
 
-      // Pie chart flotPie1
-        var piedata = [
-            { label: "Home Automation", data: [[1,50]], color: '#5c6bc0'},
-            { label: "Medical Devices", data: [[1,25]], color: '#ef5350'},
-            { label: "Farmimg montoring", data: [[1,10]], color: '#66bb6a'},
-            { label: "Military montoring", data: [[1,20]], color: '#17D4DB'},
-            { label: "Food Industry", data: [[1,15]], color: '#C96A33'}
-        ];
+        function drawChart_product() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Home Automation', 10],
+          ['Medical Devices', 5],
+          ['Farming',  5],
+          ['Military', 3],
+          ['Food',    3],
+          ['Security', 2]
+        ]);
+
+        var options = {
+         chart: {
+            title: 'Products In-house',
+            subtitle: 'Production product usage',
+          },
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
 
 
-        $.plot('#flotPie1', piedata, {
-                series: {
-                    pie: {
-                        show: true,
-                        radius: 1,
-                        innerRadius: 0.65,
-                        label: {
-                            show: true,
-                            radius: 2/3,
-                            threshold: 1
-                        },
-                        stroke: {
-                            width: 0
-                        }
-                    }
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: true
-                }
-            });
-            // Pie chart flotPie1  End
+      }
+
 
   </script>
 

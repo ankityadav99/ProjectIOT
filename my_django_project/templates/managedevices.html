@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="header_font"> Managing Production devices </h3>
+<hr>
+<br>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
+
+<style>
+    .form-control{
+        width: 30%;
+    }
+
+    .input-group{
+        width: 20%;
+        display: -webkit-box !important;
+    }
+
+
+
+</style>
+
+<form id="myform" action="/production/" method="post">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Customer_id</label>
+    <input name="cust_id"  type="text" class="form-control" id="exampleFormControlInput1">
+  </div>
+    <br>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Product type</label>
+    <select name="product_type" class="form-control" id="exampleFormControlSelect1">
+        {% for product in product_type%}
+          <option>{{product}}</option>
+        {% endfor %}
+    </select>
+  </div>
+    <br>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Firmware Version</label>
+    <input name="fw_version" type="text" class="form-control" >
+  </div>
+    <br>
+   <div class="form-group">
+     <label>Validity</label>
+     <div class="input-group date" id="example" data-provide="datepicker">
+       <input type="text" class="form-control" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+     </div>
+   </div>
+    <br>
+   <div class="form-group">
+    <label for="exampleFormControlInput1">Auto Recovery</label>
+       <select name="auto_recovery" class="form-control" id="exampleFormControlSelect2">
+          <option>Enable</option>
+          <option>Disable</option>
+        </select>
+   </div>
+    <br>
+    <br>
+   <div class="form-group">
+    <label>Authority</label>
+        <input name="authority" type="text" class="form-control" >
+   </div>
+    <br>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Comments</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+    <br>
+  <input name="view" type="submit" class="btn btn-info btn-lg" form="myform" value="Submit">
+
+
+</form>
+
+
+<script type="text/javascript">
+    $('.datepicker').datepicker();
+</script>
+
+
+
+
+
+{% endblock %}
